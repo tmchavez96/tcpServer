@@ -6,7 +6,7 @@ from portManager import PM
 
 #starting port = 12000
 ports = PM(100)
-print(ports.span)
+#print(ports.span)
 
 #hp = host port
 hp = HostPort('localhost', 10000)
@@ -24,12 +24,17 @@ while True:
             index = ports.codeToPort(gameAddress)
             print("starting on port ",gameAddress)
             #print("pos in dict = ", index)
-            retmes = gameAddress.encode()
+            retmes = gameAddress
             hp.sendMessage(retmes)
+            print("sending second message")
+            msg2 = hp.recvMessage()
+            if(len(msg2) > 2):
+                hp.sendMessage("a great succses")
+            else:
+                print("next time jimbo")
         elif(mssg == 'j'):
             retmes = 'wasnt a start'
             print(retmes)
-            retmes = retmes.encode()
             hp.sendMessage(retmes)
         else:
             print('no data from', hp.client_address)

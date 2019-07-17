@@ -15,9 +15,10 @@ while True:
         if(len(command) > 6):
             print("input too large --  should be j XXXX")
             continue
-        message = command.encode()
+        message = command
     elif(command == 's'):
-        message = command.encode()
+        print("sending start")
+        message = command
     else:
         print("invalid input")
         continue
@@ -26,6 +27,11 @@ while True:
         c1.open()
         c1.sendMessage(message)
         retmes = c1.recvMessage()
+        if(command == 's'):
+            print("sending secondary message")
+            mes = "memearino"
+            c1.sendMessage(mes)
+            temp = c1.recvMessage()
 
     finally:
         print('closing socket')
